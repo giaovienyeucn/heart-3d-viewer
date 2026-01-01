@@ -1483,6 +1483,12 @@
             display: block;
         }
 
+        .video-container iframe {
+            width: 100%;
+            aspect-ratio: 16/9;
+            display: block;
+        }
+
         .btn-close-video {
             position: absolute;
             top: 15px;
@@ -1586,10 +1592,10 @@
         <div class="video-overlay" onclick="closeVideoIntro()"></div>
         <div class="video-container">
             <button class="btn-close-video" onclick="closeVideoIntro()">✕</button>
-            <video id="intro-video" controls poster="intro-banner.jpg">
-                <source src="Video%20GT/H%E1%BB%87%20TH.mp4" type="video/mp4">
-                Trình duyệt của bạn không hỗ trợ video.
-            </video>
+            <iframe id="intro-video" src="" title="Video Giới Thiệu" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
         </div>
         <div class="video-actions">
             <button class="btn-continue" onclick="closeVideoIntro()">
@@ -2405,20 +2411,21 @@
 
         // ==================== VIDEO INTRO ====================
 
+        const YOUTUBE_VIDEO_ID = 'Gs5pJTfOSw8';
+
         // Open Video Intro
         function openVideoIntro() {
             const modal = document.getElementById('video-modal');
-            const video = document.getElementById('intro-video');
+            const iframe = document.getElementById('intro-video');
             modal.style.display = 'flex';
-            video.play();
+            iframe.src = `https://www.youtube.com/embed/${YOUTUBE_VIDEO_ID}?autoplay=1`;
         }
 
         // Close Video Intro
         function closeVideoIntro() {
             const modal = document.getElementById('video-modal');
-            const video = document.getElementById('intro-video');
-            video.pause();
-            video.currentTime = 0;
+            const iframe = document.getElementById('intro-video');
+            iframe.src = '';
             modal.style.display = 'none';
         }
 
